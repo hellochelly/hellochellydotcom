@@ -343,6 +343,88 @@
             left: 100%;
         }
         
+        /* Social Links */
+        .social-links {
+            margin: 4rem 0;
+        }
+        
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #00ff41;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 120px;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+        
+        .social-icon {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .social-link span {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .social-link.facebook:hover {
+            border-color: #1877f2;
+            color: #1877f2;
+            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+        }
+        
+        .social-link.twitter:hover {
+            border-color: #1da1f2;
+            color: #1da1f2;
+            box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
+        }
+        
+        .social-link.linkedin:hover {
+            border-color: #0077b5;
+            color: #0077b5;
+            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4);
+        }
+        
         /* Footer */
         footer {
             text-align: center;
@@ -375,6 +457,15 @@
             .cards {
                 grid-template-columns: 1fr;
             }
+            
+            .social-grid {
+                gap: 1rem;
+            }
+            
+            .social-link {
+                min-width: 100px;
+                padding: 1rem;
+            }
         }
         
         /* Scan line effect */
@@ -402,7 +493,7 @@
     
     <header>
         <div class="logo glitch" data-text="HelloChelly">HelloChelly</div>
-        <div class="tagline">// Welcome to the Digital Frontier //</div>
+        <div class="tagline">// Welcome to my Digital Frontier //</div>
     </header>
     
     <nav>
@@ -472,6 +563,25 @@
         
         <div style="text-align: center; margin: 3rem 0;">
             <button class="cyber-button" onclick="hackTheSystem()">Hack the System</button>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="social-links">
+            <h3 style="color: #00ffff; text-align: center; margin-bottom: 2rem; font-family: 'Orbitron', monospace;">Connect in the Digital Realm</h3>
+            <div class="social-grid">
+                <a href="https://facebook.com/hellochelly" class="social-link facebook" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">FB</div>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://twitter.com/helloladychelly" class="social-link twitter" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">TW</div>
+                    <span>Twitter</span>
+                </a>
+                <a href="https://linkedin.com/in/hellochelly" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">IN</div>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
         </div>
     </main>
     
