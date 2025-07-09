@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelloChelly - Digital Guestbook</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000a1a 100%);
+            color: #00ff41;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Animated grid background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0080;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15%, 49% { transform: translate(-2px, 1px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21%, 62% { transform: translate(2px, -1px); }
+        }
+        
+        /* Header */
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid #00ff41;
+            box-shadow: 0 2px 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px #00ff41;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #ff0080;
+            text-shadow: 0 0 10px #ff0080;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 1rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        nav a:hover {
+            color: #ffffff;
+            border-color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        nav a:hover::before {
+            left: 100%;
+        }
+        
+        /* Main content */
+        main {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #00ff41;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #cccccc;
+        }
+        
+        /* Guestbook Form */
+        .guestbook-form {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            color: #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Submit Button */
+        .cyber-button {
+            background: transparent;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 1rem 2rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-button:hover {
+            color: #000;
+            background: #00ff41;
+            box-shadow: 0 0 20px #00ff41;
+        }
+        
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Guestbook Entries */
+        .guestbook-entries {
+            margin-top: 3rem;
+        }
+        
+        .entry {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff41;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .entry::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0080, #00ffff, #00ff41);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .entry:hover::before {
+            transform: translateX(0);
+        }
+        
+        .entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .entry-name {
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .entry-date {
+            color: #ff0080;
+            font-size: 0.9rem;
+        }
+        
+        .entry-message {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* Terminal window for entries */
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+        }
+        
+        .terminal-header {
+            background: linear-gradient(90deg, #333, #555);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #00ff41;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .red { background: #ff5555; }
+        .yellow { background: #ffff55; }
+        .green { background: #55ff55; }
+        
+        .terminal-body {
+            padding: 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.4;
+        }
+        
+        .terminal-line {
+            margin: 0.5rem 0;
+        }
+        
+        .prompt {
+            color: #00ff41;
+        }
+        
+        .command {
+            color: #00ffff;
+        }
+        
+        .output {
+            color: #ff0080;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #00ff41;
+            margin-top: 3rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Scan line effect */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            animation: scan 3s linear infinite;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
+        /* Success message */
+        .success-message {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Error message */
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+    
+    <header>
+        <div class="logo glitch" data-text="HelloChelly">HelloChelly</div>
+        <div class="tagline">// Digital Guestbook //</div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="guestbook.html">Guestbook</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section class="hero">
+            <h1 class="glitch" data-text="Digital Guestbook">Digital Guestbook</h1>
+            <p>Leave your mark in the digital realm. Your message will be etched into the matrix forever.</p>
+        </section>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+                <span style="color: #ccc; margin-left: 1rem;">guestbook_system.exe</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">system@guestbook:~$</span>
+                    <span class="command">init_guestbook</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Guestbook system online. Ready to receive messages.</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output">Current entries: <span id="entry-count">0</span></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">system@guestbook:~$</span>
+                    <span style="animation: blink 1s infinite;">_</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="guestbook-form">
+            <h2 style="color: #00ffff; margin-bottom: 1.5rem; text-align: center;">Leave Your Message</h2>
+            <form id="guestbookForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your handle...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required placeholder="Share your thoughts, greetings, or digital wisdom..."></textarea>
+                </div>
+                
+                <button type="submit" class="cyber-button">Transmit Message</button>
+            </form>
+        </div>
+        
+        <div class="guestbook-entries">
+            <h2 style="color: #00ffff; margin-bottom: 2rem; text-align: center;">Digital Echoes</h2>
+            <div id="entries-container">
+                <!-- Real entries will be added here dynamically -->
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 HelloChelly. All rights reserved in the digital realm.</p>
+        <p style="color: #666; margin-top: 0.5rem;">Powered by neon dreams and caffeine</p>
+    </footer>
+    
+    <script>
+        // Blinking cursor animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Guestbook functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('guestbookForm');
+            const entriesContainer = document.getElementById('entries-container');
+            const entryCount = document.getElementById('entry-count');
+            
+            // API endpoint
+            const API_URL = '/api/guestbook';
+            
+            // Anti-flooding variables
+            let lastSubmissionTime = 0;
+            const MIN_SUBMISSION_INTERVAL = 30000; // 30 seconds between submissions
+            const MAX_MESSAGE_LENGTH = 500; // Max 500 characters per message
+            const MAX_NAME_LENGTH = 30; // Max 30 characters for name
+            
+            // Load entries from API
+            loadEntries();
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                // Validation checks
+                if (!name || !message) {
+                    showErrorMessage('Please fill in both name and message fields.');
+                    return;
+                }
+                
+                if (name.length > MAX_NAME_LENGTH) {
+                    showErrorMessage(`Name must be ${MAX_NAME_LENGTH} characters or less.`);
+                    return;
+                }
+                
+                if (message.length > MAX_MESSAGE_LENGTH) {
+                    showErrorMessage(`Message must be ${MAX_MESSAGE_LENGTH} characters or less.`);
+                    return;
+                }
+                
+                // Check for spam patterns
+                if (isSpam(name, message)) {
+                    showErrorMessage('Message detected as spam. Please try again with different content.');
+                    return;
+                }
+                
+                // Rate limiting - check time between submissions
+                const currentTime = Date.now();
+                if (currentTime - lastSubmissionTime < MIN_SUBMISSION_INTERVAL) {
+                    const remainingTime = Math.ceil((MIN_SUBMISSION_INTERVAL - (currentTime - lastSubmissionTime)) / 1000);
+                    showErrorMessage(`Please wait ${remainingTime} seconds before submitting another message.`);
+                    return;
+                }
+                
+                // Submit to API
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name, message })
+                    });
+                    
+                    if (response.ok) {
+                        const newEntry = await response.json();
+                        addEntryToDOM(newEntry);
+                        updateEntryCount();
+                        
+                        // Update last submission time
+                        lastSubmissionTime = currentTime;
+                        
+                        // Show success message
+                        showSuccessMessage();
+                        
+                        // Reset form
+                        form.reset();
+                        
+                        // Add glitch effect
+                        const hero = document.querySelector('.hero h1');
+                        hero.style.animation = 'glitch-1 0.3s infinite';
+                        setTimeout(() => {
+                            hero.style.animation = '';
+                        }, 300);
+                    } else {
+                        const errorData = await response.json();
+                        showErrorMessage(errorData.error || 'Failed to submit message. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    showErrorMessage('Network error. Please check your connection and try again.');
+                }
+            });
+            
+            async function loadEntries() {
+                try {
+                    const response = await fetch(API_URL);
+                    if (response.ok) {
+                        const entries = await response.json();
+                        displayEntries(entries);
+                        updateEntryCount(entries.length);
+                    } else {
+                        console.error('Failed to load entries');
+                        showErrorMessage('Failed to load guestbook entries.');
+                    }
+                } catch (error) {
+                    console.error('Load error:', error);
+                    showErrorMessage('Network error. Please refresh the page.');
+                }
+            }
+            
+            function displayEntries(entries) {
+                entriesContainer.innerHTML = '';
+                entries.forEach(entry => {
+                    addEntryToDOM(entry);
+                });
+            }
+            
+            function addEntryToDOM(entry) {
+                const entryElement = document.createElement('div');
+                entryElement.className = 'entry';
+                
+                // Format the date
+                const date = new Date(entry.created_at);
+                const formattedDate = date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                
+                entryElement.innerHTML = `
+                    <div class="entry-header">
+                        <div class="entry-name">${entry.name}</div>
+                        <div class="entry-date">${formattedDate}</div>
+                    </div>
+                    <div class="entry-message">${entry.message}</div>
+                `;
+                
+                // Add with animation
+                entryElement.style.opacity = '0';
+                entryElement.style.transform = 'translateY(-20px)';
+                entriesContainer.appendChild(entryElement);
+                
+                setTimeout(() => {
+                    entryElement.style.transition = 'all 0.5s ease';
+                    entryElement.style.opacity = '1';
+                    entryElement.style.transform = 'translateY(0)';
+                }, 100);
+            }
+            
+            function updateEntryCount(count) {
+                entryCount.textContent = count || 0;
+            }
+            
+            function showSuccessMessage() {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success-message';
+                successDiv.textContent = 'Message transmitted successfully! Your digital echo has been recorded.';
+                
+                const form = document.getElementById('guestbookForm');
+                form.parentNode.insertBefore(successDiv, form.nextSibling);
+                
+                setTimeout(() => {
+                    successDiv.remove();
+                }, 5000);
+            }
+            
+            function showErrorMessage(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = message;
+                
+                const form = document.getElementById('guestbookForm');
+                form.parentNode.insertBefore(errorDiv, form.nextSibling);
+                
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 5000);
+            }
+            
+            function isSpam(name, message) {
+                const spamPatterns = [
+                    /buy\s+now/i,
+                    /click\s+here/i,
+                    /free\s+viagra/i,
+                    /casino/i,
+                    /loan/i,
+                    /credit\s+card/i,
+                    /make\s+money/i,
+                    /earn\s+cash/i,
+                    /weight\s+loss/i,
+                    /diet\s+pills/i,
+                    /http:\/\/|https:\/\//i, // No URLs
+                    /www\./i,
+                    /\.com|\.net|\.org/i,
+                    /[A-Z]{5,}/g, // Too many caps
+                    /!{3,}|\.{3,}/g, // Too many punctuation marks
+                    /[^\w\s!.,?-]/g // Special characters (except basic punctuation)
+                ];
+                
+                const combinedText = (name + ' ' + message).toLowerCase();
+                
+                // Check for repeated characters
+                if (/(.)\1{4,}/g.test(combinedText)) {
+                    return true;
+                }
+                
+                // Check for spam patterns
+                for (let pattern of spamPatterns) {
+                    if (pattern.test(combinedText)) {
+                        return true;
+                    }
+                }
+                
+                // Check for very short messages (likely spam)
+                if (message.length < 10) {
+                    return true;
+                }
+                
+                return false;
+            }
+            
+
+            
+            // Add some interactive glitch effects
+            const glitchElements = document.querySelectorAll('.glitch');
+            
+            glitchElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.animation = 'glitch-1 0.3s infinite';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 300);
+                });
+            });
+            
+            // Random glitch effect
+            setInterval(() => {
+                const elements = document.querySelectorAll('h1, h2, h3');
+                const randomElement = elements[Math.floor(Math.random() * elements.length)];
+                randomElement.style.animation = 'glitch-1 0.2s';
+                setTimeout(() => {
+                    randomElement.style.animation = '';
+                }, 200);
+            }, 8000);
+        });
+    </script>
+</body>
+</html> 
