@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelloChelly - Welcome to the Grid</title>
+    <title>HelloChelly - Digital Blog</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
@@ -349,239 +349,197 @@
             color: #cccccc;
         }
         
-        /* Terminal window */
-        .terminal {
+        /* Admin Panel */
+        .admin-panel {
             background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            margin: 2rem 0;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+            border: 2px solid #ff0080;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
         }
         
-        .terminal-header {
-            background: linear-gradient(90deg, #333, #555);
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid #00ff41;
+        .admin-panel h2 {
+            color: #ff0080;
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .admin-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .form-group {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 0.5rem;
         }
         
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
-        .red { background: #ff5555; }
-        .yellow { background: #ffff55; }
-        .green { background: #55ff55; }
-        
-        .terminal-body {
-            padding: 1rem;
-            font-family: 'Share Tech Mono', monospace;
-            line-height: 1.4;
-        }
-        
-        .terminal-line {
-            margin: 0.5rem 0;
-        }
-        
-        .prompt {
-            color: #00ff41;
-        }
-        
-        .command {
+        .form-group label {
             color: #00ffff;
+            font-weight: bold;
         }
         
-        .output {
-            color: #ff0080;
-        }
-        
-        /* Cards */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .card {
-            background: rgba(0, 0, 0, 0.6);
+        .form-group input,
+        .form-group textarea {
+            background: rgba(0, 0, 0, 0.7);
             border: 1px solid #00ff41;
-            border-radius: 10px;
+            color: #ffffff;
+            padding: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            border-radius: 4px;
+        }
+        
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .admin-button {
+            background: linear-gradient(45deg, #ff0080, #ff6600);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .admin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+        }
+        
+        /* Blog Posts */
+        .blog-posts {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .blog-post {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
             padding: 2rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .card::before {
+        .blog-post::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff0080, #00ffff, #00ff41);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.5s;
         }
         
-        .card:hover::before {
-            transform: translateX(0);
-        }
-        
-        .card:hover {
+        .blog-post:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+            border-color: #00ffff;
         }
         
-        .card h3 {
-            font-family: 'Orbitron', monospace;
-            color: #00ffff;
+        .blog-post:hover::before {
+            left: 100%;
+        }
+        
+        .post-header {
             margin-bottom: 1rem;
+        }
+        
+        .post-title {
+            font-family: 'Orbitron', monospace;
             font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        .card h3::before {
-            content: '>';
-            color: #00ff41;
-            font-weight: bold;
-        }
-        
-        .card p {
-            color: #cccccc;
-            line-height: 1.6;
-        }
-        
-        /* Buttons */
-        .cyber-button {
-            background: transparent;
-            border: 2px solid #00ff41;
-            color: #00ff41;
-            padding: 1rem 2rem;
-            font-family: 'Orbitron', monospace;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cyber-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .cyber-button:hover {
-            color: #000;
-            background: #00ff41;
-            box-shadow: 0 0 20px #00ff41;
-        }
-        
-        .cyber-button:hover::before {
-            left: 100%;
-        }
-        
-        /* Social Links */
-        .social-links {
-            margin: 4rem 0;
-        }
-        
-        .social-grid {
+        .post-meta .date-info {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .social-link {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            text-decoration: none;
-            color: #00ff41;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            min-width: 120px;
+            gap: 0.3rem;
         }
         
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
-            transition: left 0.5s;
+        .post-meta .time-info {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
         
-        .social-link:hover::before {
-            left: 100%;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
-            border-color: #00ffff;
+        .post-meta .icon {
+            font-size: 0.8rem;
             color: #00ffff;
         }
         
-        .social-icon {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
+        .post-excerpt {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: #ff0080;
+            text-decoration: none;
             font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px currentColor;
+            transition: all 0.3s ease;
         }
         
-        .social-link span {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .read-more:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff0080;
         }
         
-        .social-link.facebook:hover {
-            border-color: #1877f2;
-            color: #1877f2;
-            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+        /* Full Post View */
+        .full-post {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff41;
+            border-radius: 8px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
         }
         
-        .social-link.twitter:hover {
-            border-color: #1da1f2;
-            color: #1da1f2;
-            box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
+        .full-post .post-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
         
-        .social-link.linkedin:hover {
-            border-color: #0077b5;
-            color: #0077b5;
-            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4);
+        .full-post .post-content {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
         
-        .social-link.github:hover {
-            border-color: #333;
-            color: #333;
-            box-shadow: 0 10px 30px rgba(51, 51, 51, 0.4);
+        .back-to-blog {
+            display: inline-block;
+            color: #00ffff;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-blog:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #00ffff;
         }
         
         /* Footer */
@@ -597,14 +555,6 @@
         @media (max-width: 768px) {
             header {
                 padding: 2rem 1rem;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .tagline {
-                font-size: 1.1rem;
             }
             
             nav {
@@ -627,21 +577,28 @@
                 font-size: 1.1rem;
             }
             
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
             
-            .cards {
-                grid-template-columns: 1fr;
+            .admin-panel {
+                padding: 1.5rem;
             }
             
-            .social-grid {
-                gap: 1rem;
+            .full-post {
+                padding: 2rem;
             }
             
-            .social-link {
-                min-width: 100px;
-                padding: 1rem;
+            .full-post .post-title {
+                font-size: 2rem;
             }
         }
         
@@ -681,12 +638,12 @@
             <div class="particle"></div>
         </div>
         <div class="logo glitch" data-text="HelloChelly">HelloChelly</div>
-        <div class="tagline">// Welcome to my Digital Frontier //</div>
+        <div class="tagline">// Digital Blog //</div>
     </header>
     
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="blog.html">Blog</a></li>
@@ -697,84 +654,41 @@
     
     <main>
         <section class="hero">
-            <h1 class="glitch" data-text="Enter the Grid">Enter the Grid</h1>
-            <p>Welcome to my corner of cyberspace. Here, code meets creativity in the neon-lit streets of the digital underground.</p>
+            <h1 class="glitch" data-text="Digital Blog">Digital Blog</h1>
+            <p>Thoughts, tutorials, and insights from the digital frontier. Exploring the intersection of code, creativity, and cyberpunk culture.</p>
         </section>
         
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-button red"></div>
-                <div class="terminal-button yellow"></div>
-                <div class="terminal-button green"></div>
-                <span style="color: #ccc; margin-left: 1rem;">neural_interface.exe</span>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-line">
-                    <span class="prompt">chelly@cybernet:~$</span>
-                    <span class="command">sudo access --level=visitor</span>
+        <!-- Admin Panel (Hidden by default, shown with ?admin=true) -->
+        <div id="adminPanel" class="admin-panel" style="display: none;">
+            <h2>Create New Blog Post</h2>
+            <form class="admin-form" id="blogForm">
+                <div class="form-group">
+                    <label for="postTitle">Title:</label>
+                    <input type="text" id="postTitle" required>
                 </div>
-                <div class="terminal-line">
-                    <span class="output">Access granted. Welcome to the matrix.</span>
+                <div class="form-group">
+                    <label for="postExcerpt">Excerpt:</label>
+                    <textarea id="postExcerpt" required></textarea>
                 </div>
-                <div class="terminal-line">
-                    <span class="prompt">chelly@cybernet:~$</span>
-                    <span class="command">cat welcome.txt</span>
+                <div class="form-group">
+                    <label for="postContent">Content:</label>
+                    <textarea id="postContent" required></textarea>
                 </div>
-                <div class="terminal-line">
-                    <span class="output">System initialized. All neural pathways active.</span>
-                </div>
-                <div class="terminal-line">
-                    <span class="output">Ready for data transmission...</span>
-                </div>
-                <div class="terminal-line">
-                    <span class="prompt">chelly@cybernet:~$</span>
-                    <span style="animation: blink 1s infinite;">_</span>
-                </div>
+                <button type="submit" class="admin-button">Publish Post</button>
+            </form>
+        </div>
+        
+        <!-- Blog Posts Container -->
+        <div id="blogContainer">
+            <div class="blog-posts" id="blogPosts">
+                <!-- Blog posts will be loaded here -->
             </div>
         </div>
         
-        <div class="cards">
-            <div class="card">
-                <h3>Code Architect</h3>
-                <p>Digital native since age 6. Frontend developer with expertise in React and Node.js, currently learning Go. By night, I transform into an OSINT ghost, hunting digital footprints in the shadows of the web.</p>
-            </div>
-            
-            <div class="card">
-                <h3>Digital Wanderer</h3>
-                <p>Constantly downloading new knowledge through documentaries and e-books. Always exploring new horizons, whether it's a new framework or discovering new places across the globe.</p>
-            </div>
-            
-            <div class="card">
-                <h3>Neon Dreams</h3>
-                <p>Kawaii culture brings color to my monochrome code life. Balancing the harsh edges of cyberpunk with soft pixels and cute aesthetics. Even in the matrix, we need a little sweetness.</p>
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 3rem 0;">
-            <button class="cyber-button" onclick="hackTheSystem()">Hack the System</button>
-        </div>
-        
-        <!-- Social Links -->
-        <div class="social-links">
-            <h3 style="color: #00ffff; text-align: center; margin-bottom: 2rem; font-family: 'Orbitron', monospace;">Connect in the Digital Realm</h3>
-            <div class="social-grid">
-                <a href="https://facebook.com/hellochelly" class="social-link facebook" target="_blank" rel="noopener noreferrer">
-                    <div class="social-icon">FB</div>
-                    <span>Facebook</span>
-                </a>
-                <a href="https://twitter.com/helloladychelly" class="social-link twitter" target="_blank" rel="noopener noreferrer">
-                    <div class="social-icon">TW</div>
-                    <span>Twitter</span>
-                </a>
-                <a href="https://linkedin.com/in/hellochelly" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
-                    <div class="social-icon">IN</div>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/hellochelly" class="social-link github" target="_blank" rel="noopener noreferrer">
-                    <div class="social-icon">GH</div>
-                    <span>GitHub</span>
-                </a>
-            </div>
+        <!-- Full Post View (Hidden by default) -->
+        <div id="fullPostView" style="display: none;">
+            <a href="#" class="back-to-blog" onclick="showBlogList()">← Back to Blog</a>
+            <div id="fullPostContent"></div>
         </div>
     </main>
     
@@ -784,61 +698,187 @@
     </footer>
     
     <script>
-        // Blinking cursor animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes blink {
-                0%, 50% { opacity: 1; }
-                51%, 100% { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+        // Blog posts data (loaded from API)
+        let blogPosts = [];
         
-        // Hack the system button
-        function hackTheSystem() {
-            const messages = [
-                "Accessing mainframe...",
-                "Bypassing firewall...",
-                "Decrypting data...",
-                "Access granted!",
-                "Welcome to the system, hacker."
-            ];
-            
-            let i = 0;
-            const interval = setInterval(() => {
-                if (i < messages.length) {
-                    console.log(messages[i]);
-                    i++;
-                } else {
-                    clearInterval(interval);
-                    alert("System hacked successfully! 🔓");
-                }
-            }, 1000);
+        // Check if admin mode is enabled
+        function checkAdminMode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('admin') === 'true') {
+                document.getElementById('adminPanel').style.display = 'block';
+            }
         }
         
-        // Add some interactive glitch effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const glitchElements = document.querySelectorAll('.glitch');
+        // Load blog posts from API
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('/api/posts');
+                if (response.ok) {
+                    blogPosts = await response.json();
+                    displayBlogPosts();
+                } else {
+                    console.error('Failed to load posts');
+                    // Show fallback message
+                    document.getElementById('blogPosts').innerHTML = `
+                        <div class="blog-post">
+                            <h2>Blog Posts</h2>
+                            <p>Posts will appear here once you create them through the admin panel.</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading posts:', error);
+            }
+        }
+        
+        // Display blog posts
+        function displayBlogPosts() {
+            const container = document.getElementById('blogPosts');
+            container.innerHTML = '';
             
-            glitchElements.forEach(element => {
-                element.addEventListener('mouseenter', function() {
-                    this.style.animation = 'glitch-1 0.3s infinite';
-                    setTimeout(() => {
-                        this.style.animation = '';
-                    }, 300);
+            if (blogPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="blog-post">
+                        <h2>No Posts Yet</h2>
+                        <p>Create your first blog post using the admin panel!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            blogPosts.forEach(post => {
+                const postDate = new Date(post.date);
+                const formattedDate = postDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                 });
+                const formattedTime = postDate.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                
+                const postElement = document.createElement('article');
+                postElement.className = 'blog-post';
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <h2 class="post-title">${post.title}</h2>
+                        <div class="post-meta">
+                            By ${post.author} • 
+                            <span class="date-info">
+                                <span class="icon">📅</span>
+                                ${formattedDate}
+                            </span>
+                            at 
+                            <span class="time-info">
+                                <span class="icon">🕐</span>
+                                ${formattedTime}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="post-excerpt">${post.excerpt}</div>
+                    <a href="#" class="read-more" onclick="showFullPost(${post.id})">Read More →</a>
+                `;
+                container.appendChild(postElement);
             });
+        }
+        
+        // Show full post
+        function showFullPost(postId) {
+            const post = blogPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const postDate = new Date(post.date);
+            const formattedDate = postDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const formattedTime = postDate.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            
+            document.getElementById('blogContainer').style.display = 'none';
+            document.getElementById('fullPostView').style.display = 'block';
+            
+            const fullPostContent = document.getElementById('fullPostContent');
+            fullPostContent.innerHTML = `
+                <div class="full-post">
+                    <div class="post-header">
+                        <h1 class="post-title">${post.title}</h1>
+                        <div class="post-meta">
+                            By ${post.author} • 
+                            <span class="date-info">
+                                <span class="icon">📅</span>
+                                ${formattedDate}
+                            </span>
+                            at 
+                            <span class="date-info">
+                                <span class="icon">🕐</span>
+                                ${formattedTime}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="post-content">${post.content.replace(/\n/g, '<br>')}</div>
+                </div>
+            `;
+        }
+        
+        // Show blog list
+        function showBlogList() {
+            document.getElementById('fullPostView').style.display = 'none';
+            document.getElementById('blogContainer').style.display = 'block';
+        }
+        
+        // Handle form submission
+        document.getElementById('blogForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('postTitle').value;
+            const excerpt = document.getElementById('postExcerpt').value;
+            const content = document.getElementById('postContent').value;
+            
+            try {
+                const response = await fetch('/api/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title,
+                        excerpt,
+                        content,
+                        author: 'HelloChelly'
+                    })
+                });
+                
+                if (response.ok) {
+                    // Reload posts to show the new one
+                    await loadBlogPosts();
+                    
+                    // Clear form
+                    document.getElementById('postTitle').value = '';
+                    document.getElementById('postExcerpt').value = '';
+                    document.getElementById('postContent').value = '';
+                    
+                    alert('Blog post published successfully!');
+                } else {
+                    alert('Failed to publish post. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error publishing post:', error);
+                alert('Error publishing post. Please try again.');
+            }
         });
         
-        // Random glitch effect
-        setInterval(() => {
-            const elements = document.querySelectorAll('h1, h2, h3');
-            const randomElement = elements[Math.floor(Math.random() * elements.length)];
-            randomElement.style.animation = 'glitch-1 0.2s';
-            setTimeout(() => {
-                randomElement.style.animation = '';
-            }, 200);
-        }, 8000);
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAdminMode();
+            loadBlogPosts();
+        });
     </script>
 </body>
-</html>
+</html> 
