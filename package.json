@@ -2,7 +2,7 @@
   "name": "hellochelly-guestbook",
   "version": "1.0.0",
   "dependencies": {
-    "@vercel/postgres": "^0.7.2"
+    "pg": "^8.11.3"
   },
   "description": "Cyberpunk guestbook with Vercel Postgres",
   "main": "index.html",
