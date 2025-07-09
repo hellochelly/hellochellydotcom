@@ -2,9 +2,8 @@ name: Waka Readme
 
 on:
 schedule:
-# Runs at 6:30 PM UTC daily (adjust timezone as needed)
 - cron: ‘30 18 * * *’
-workflow_dispatch: # Allows manual trigger
+workflow_dispatch:
 
 jobs:
 update-readme:
