@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     
     if (process.env.EMAIL_SERVICE === 'custom') {
       // Custom SMTP settings
-      transporter = nodemailer.createTransporter({
+      transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT || 587,
         secure: process.env.SMTP_SECURE === 'true',
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       });
     } else {
       // Use predefined service (outlook, yahoo, etc.)
-      transporter = nodemailer.createTransporter({
+      transporter = nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE || 'outlook',
         auth: {
           user: process.env.EMAIL_USER,
