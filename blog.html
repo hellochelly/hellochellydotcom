@@ -705,7 +705,131 @@
         function checkAdminMode() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('admin') === 'true') {
-                document.getElementById('adminPanel').style.display = 'block';
+                showAdminLogin();
+            }
+        }
+        
+        // Show admin login form
+        function showAdminLogin() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.style.display = 'block';
+            adminPanel.innerHTML = `
+                <h2>🔐 Admin Access Required</h2>
+                <div class="admin-form">
+                    <div class="form-group">
+                        <label for="adminPassword">Password:</label>
+                        <input type="password" id="adminPassword" placeholder="Enter admin password">
+                    </div>
+                    <button onclick="checkAdminPassword()" class="admin-button">Access Admin Panel</button>
+                </div>
+            `;
+        }
+        
+        // Check admin password
+        async function checkAdminPassword() {
+            const password = document.getElementById('adminPassword').value;
+            
+            try {
+                const response = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showAdminPanel();
+                } else {
+                    alert('❌ Incorrect password. Access denied.');
+                    document.getElementById('adminPassword').value = '';
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                alert('❌ Authentication error. Please try again.');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+        
+        // Show the actual admin panel
+        function showAdminPanel() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.innerHTML = `
+                <h2>Create New Blog Post</h2>
+                <form class="admin-form" id="blogForm">
+                    <div class="form-group">
+                        <label for="postTitle">Title:</label>
+                        <input type="text" id="postTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postExcerpt">Excerpt:</label>
+                        <textarea id="postExcerpt" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Content:</label>
+                        <textarea id="postContent" required></textarea>
+                    </div>
+                    <button type="submit" class="admin-button">Publish Post</button>
+                </form>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <button onclick="logoutAdmin()" class="admin-button" style="background: linear-gradient(45deg, #ff0080, #ff6600);">Logout</button>
+                </div>
+            `;
+            
+            // Re-attach the form event listener
+            document.getElementById('blogForm').addEventListener('submit', handleFormSubmission);
+        }
+        
+        // Logout from admin panel
+        function logoutAdmin() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.style.display = 'none';
+            // Remove admin parameter from URL
+            const url = new URL(window.location);
+            url.searchParams.delete('admin');
+            window.history.replaceState({}, '', url);
+        }
+        
+        // Handle form submission (moved to separate function)
+        async function handleFormSubmission(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('postTitle').value;
+            const excerpt = document.getElementById('postExcerpt').value;
+            const content = document.getElementById('postContent').value;
+            
+            try {
+                const response = await fetch('/api/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title,
+                        excerpt,
+                        content,
+                        author: 'HelloChelly'
+                    })
+                });
+                
+                if (response.ok) {
+                    // Reload posts to show the new one
+                    await loadBlogPosts();
+                    
+                    // Clear form
+                    document.getElementById('postTitle').value = '';
+                    document.getElementById('postExcerpt').value = '';
+                    document.getElementById('postContent').value = '';
+                    
+                    alert('Blog post published successfully!');
+                } else {
+                    alert('Failed to publish post. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error publishing post:', error);
+                alert('Error publishing post. Please try again.');
             }
         }
         
@@ -833,46 +957,7 @@
             document.getElementById('blogContainer').style.display = 'block';
         }
         
-        // Handle form submission
-        document.getElementById('blogForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const title = document.getElementById('postTitle').value;
-            const excerpt = document.getElementById('postExcerpt').value;
-            const content = document.getElementById('postContent').value;
-            
-            try {
-                const response = await fetch('/api/posts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        title,
-                        excerpt,
-                        content,
-                        author: 'HelloChelly'
-                    })
-                });
-                
-                if (response.ok) {
-                    // Reload posts to show the new one
-                    await loadBlogPosts();
-                    
-                    // Clear form
-                    document.getElementById('postTitle').value = '';
-                    document.getElementById('postExcerpt').value = '';
-                    document.getElementById('postContent').value = '';
-                    
-                    alert('Blog post published successfully!');
-                } else {
-                    alert('Failed to publish post. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error publishing post:', error);
-                alert('Error publishing post. Please try again.');
-            }
-        });
+
         
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
