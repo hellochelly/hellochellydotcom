@@ -36,7 +36,15 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
-      const { name, message } = req.body;
+      let body = req.body;
+      if (typeof body === 'string') {
+        try {
+          body = JSON.parse(body);
+        } catch (e) {
+          return res.status(400).json({ error: 'Invalid JSON' });
+        }
+      }
+      const { name, message } = body;
       
       // Validation
       if (!name || !message) {
