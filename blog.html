@@ -455,6 +455,32 @@
             50% { opacity: 0.7; }
         }
         
+        /* Admin Section */
+        .admin-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            position: relative;
+        }
+        
+        .admin-section::before {
+            content: 'ADMIN_ACCESS';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #00ff41;
+            font-size: 0.8rem;
+            padding: 0 10px;
+            font-weight: bold;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
         /* Blog Posts */
         .blog-posts {
             display: grid;
@@ -697,10 +723,6 @@
         <section class="hero">
             <h1 class="glitch" data-text="Digital Blog">Digital Blog</h1>
             <p>Thoughts, tutorials, and insights from the digital frontier. Exploring the intersection of code, creativity, and cyberpunk culture.</p>
-            <button onclick="showAdminLogin()" class="admin-login-btn">
-                <span class="btn-icon">🔐</span>
-                Admin Login
-            </button>
         </section>
         
         <!-- Admin Panel (Hidden by default, shown with ?admin=true) -->
@@ -728,6 +750,14 @@
             <div class="blog-posts" id="blogPosts">
                 <!-- Blog posts will be loaded here -->
             </div>
+        </div>
+        
+        <!-- Admin Login Section -->
+        <div class="admin-section">
+            <button onclick="showAdminLogin()" class="admin-login-btn">
+                <span class="btn-icon">🔐</span>
+                Admin Login
+            </button>
         </div>
         
         <!-- Full Post View (Hidden by default) -->
