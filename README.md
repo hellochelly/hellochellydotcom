@@ -135,6 +135,14 @@ This project is licensed under the MIT License - see the <LICENSE> file for deta
 
 </div>
 
+## 📊 Weekly Development Breakdown
+
+<!--START_SECTION:waka-->
+
+<!--END_SECTION:waka-->
+
+-----
+
 ## 🏆 Recent Updates
 
 - 🎉 **v2.0.0** - Complete redesign with modern UI/UX
