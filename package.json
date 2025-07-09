@@ -11,8 +11,11 @@
     "build": "echo 'No build step required'",
     "start": "vercel dev"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "devDependencies": {},
   "keywords": ["guestbook", "cyberpunk", "vercel", "postgres"],
   "author": "HelloChelly",
   "license": "MIT"
-} 
+}
