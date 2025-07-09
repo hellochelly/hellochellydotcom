@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelloChelly - About the Digital Architect</title>
+    <title>HelloChelly - Digital Projects (WIP)</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
@@ -196,19 +196,47 @@
             color: #cccccc;
         }
         
-        /* About section */
-        .about-section {
+        /* WIP Banner */
+        .wip-banner {
+            background: rgba(255, 165, 0, 0.1);
+            border: 2px solid #ffa500;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 165, 0, 0.2);
+        }
+        
+        .wip-banner h2 {
+            color: #ffa500;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 1rem;
+        }
+        
+        .wip-banner p {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .project-card {
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid #00ff41;
             border-radius: 10px;
-            padding: 3rem;
-            margin: 3rem 0;
+            padding: 2rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .about-section::before {
+        .project-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -220,16 +248,16 @@
             transition: transform 0.5s ease;
         }
         
-        .about-section:hover::before {
+        .project-card:hover::before {
             transform: translateX(0);
         }
         
-        .about-section:hover {
+        .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
         }
         
-        .about-section h3 {
+        .project-card h3 {
             font-family: 'Orbitron', monospace;
             color: #00ffff;
             margin-bottom: 1rem;
@@ -239,69 +267,43 @@
             gap: 0.5rem;
         }
         
-        .about-section h3::before {
+        .project-card h3::before {
             content: '>';
             color: #00ff41;
             font-weight: bold;
         }
         
-        .about-section p {
+        .project-card p {
             color: #cccccc;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
         
-        /* Skills section */
-        .skills-container {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 3rem 0;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
         }
         
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .skill-category {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid #00ffff;
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-        
-        .skill-category h4 {
-            color: #00ffff;
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', monospace;
-            text-align: center;
-        }
-        
-        .skill-list {
-            list-style: none;
-        }
-        
-        .skill-list li {
-            color: #cccccc;
-            padding: 0.3rem 0;
-            border-left: 2px solid transparent;
-            padding-left: 1rem;
+        .project-link {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
         
-        .skill-list li:hover {
-            border-left-color: #00ff41;
-            color: #00ff41;
-            transform: translateX(5px);
+        .project-link:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
         }
         
-        /* Timeline */
-        .timeline {
+        /* Podcast Section */
+        .podcast-section {
             background: rgba(0, 0, 0, 0.8);
             border: 2px solid #ff0080;
             border-radius: 10px;
@@ -310,45 +312,52 @@
             box-shadow: 0 0 30px rgba(255, 0, 128, 0.2);
         }
         
-        .timeline h3 {
+        .podcast-section h3 {
             color: #ff0080;
-            text-align: center;
             margin-bottom: 2rem;
+            font-family: 'Orbitron', monospace;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .podcast-section h3::before {
+            content: '>';
+            color: #ff0080;
+            font-weight: bold;
+        }
+        
+        .podcast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .podcast-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #ff0080;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .podcast-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 128, 0.3);
+        }
+        
+        .podcast-card h4 {
+            color: #ff0080;
+            margin-bottom: 0.5rem;
             font-family: 'Orbitron', monospace;
         }
         
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            border-left: 4px solid #ff0080;
-        }
-        
-        .timeline-year {
-            background: #ff0080;
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-right: 1rem;
-            min-width: 80px;
-            text-align: center;
-        }
-        
-        .timeline-content {
-            flex: 1;
-        }
-        
-        .timeline-content h4 {
-            color: #ff0080;
-            margin-bottom: 0.5rem;
-        }
-        
-        .timeline-content p {
+        .podcast-card p {
             color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
         
         /* Terminal window */
@@ -430,23 +439,12 @@
                 font-size: 2rem;
             }
             
-            .about-section {
-                padding: 2rem;
-                margin: 2rem 1rem;
-            }
-            
-            .skills-grid {
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
             
-            .timeline-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .timeline-year {
-                margin-right: 0;
-                margin-bottom: 1rem;
+            .podcast-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -475,7 +473,7 @@
     
     <header>
         <div class="logo glitch" data-text="HelloChelly">HelloChelly</div>
-        <div class="tagline">// Digital Architect Profile //</div>
+        <div class="tagline">// Digital Projects (WIP) //</div>
     </header>
     
     <nav>
@@ -490,138 +488,73 @@
     
     <main>
         <section class="hero">
-            <h1 class="glitch" data-text="Digital Architect">Digital Architect</h1>
-            <p>From the depths of cyberspace to the neon-lit streets of the digital underground, I am a code architect who bridges the gap between human dreams and machine logic.</p>
+            <h1 class="glitch" data-text="Digital Projects">Digital Projects</h1>
+            <p>Exploring the depths of code and creativity. Here's what I've been building in the digital realm.</p>
         </section>
+        
+        <div class="wip-banner">
+            <h2>🚧 Work in Progress 🚧</h2>
+            <p>This page is currently under construction. More projects and podcast links coming soon!</p>
+        </div>
         
         <div class="terminal">
             <div class="terminal-header">
                 <div class="terminal-button red"></div>
                 <div class="terminal-button yellow"></div>
                 <div class="terminal-button green"></div>
-                <span style="color: #ccc; margin-left: 1rem;">profile_scan.exe</span>
+                <span style="color: #ccc; margin-left: 1rem;">projects_system.exe</span>
             </div>
             <div class="terminal-body">
                 <div class="terminal-line">
-                    <span class="prompt">system@matrix:~$</span>
-                    <span class="command">scan_profile --user=chelly</span>
+                    <span class="prompt">system@projects:~$</span>
+                    <span class="command">load_projects</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">Profile found. Accessing neural pathways...</span>
+                    <span class="output">Loading project database...</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">Digital native since age 6</span>
+                    <span class="output">Status: Under construction</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">Frontend developer with React/Node.js expertise</span>
+                    <span class="output">Estimated completion: Soon™</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">OSINT ghost by night</span>
-                </div>
-                <div class="terminal-line">
-                    <span class="prompt">system@matrix:~$</span>
+                    <span class="prompt">system@projects:~$</span>
                     <span style="animation: blink 1s infinite;">_</span>
                 </div>
             </div>
         </div>
         
-        <div class="about-section">
-            <h3>Digital Architect</h3>
-            <p>Digital native since age 6, when I first touched a keyboard and fell into the rabbit hole of code. I am a frontend developer, with expertise in React, Node.js, and Go. Building interfaces that bridge the gap between human dreams and machine logic.</p>
-            <p>When the sun sets, I transform into an OSINT ghost, hunting digital footprints in the shadows of the web. The matrix is my playground, and every line of code is a step deeper into the digital frontier.</p>
-            <p>Constantly downloading new knowledge through documentaries and e-books on my Kindle. When I'm not debugging code, you'll find me exploring new horizons and seeking the next adventure. Whether it's a new framework or discovering new places across the globe, I'm always chasing the next digital high. The world is my database, and I'm constantly querying for new experiences.</p>
-            <p>In a world of dark terminals and glowing screens, I find beauty in the small things - kawaii culture brings color to my monochrome code life. Balancing the harsh edges of cyberpunk with soft pixels and cute aesthetics. Because even in the matrix, we need a little sweetness to keep the soul intact. My code may be cold and logical, but my heart beats with the rhythm of neon dreams.</p>
-            <p>I believe in the power of code to change the world, one function at a time. Every bug is a lesson, every crash is a story, and every successful deployment is a victory against the chaos of the digital realm. In the grand scheme of the internet, we're all just data points, but I choose to be a data point that creates, innovates, and leaves a positive digital footprint.</p>
-        </div>
-        
-        <div class="skills-container">
-            <h3 style="color: #00ffff; text-align: center; margin-bottom: 2rem; font-family: 'Orbitron', monospace;">Skill Matrix</h3>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Frontend</h4>
-                    <ul class="skill-list">
-                        <li>React.js</li>
-                        <li>JavaScript (ES6+)</li>
-                        <li>HTML5 & CSS3</li>
-                        <li>TypeScript</li>
-                        <li>Next.js</li>
-                        <li>Tailwind CSS</li>
-                    </ul>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Personal Website</h3>
+                <p>This cyberpunk-themed personal website built with HTML, CSS, and JavaScript. Features glitch effects, animated grid backgrounds, and a guestbook system.</p>
+                <div class="project-links">
+                    <a href="https://github.com/hellochelly/hellochellydotcom" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="index.html" class="project-link">Live Site</a>
                 </div>
-                
-                <div class="skill-category">
-                    <h4>Backend</h4>
-                    <ul class="skill-list">
-                        <li>Node.js</li>
-                        <li>Express.js</li>
-                        <li>Go</li>
-                        <li>Python</li>
-                        <li>REST APIs</li>
-                        <li>GraphQL</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Tools & Tech</h4>
-                    <ul class="skill-list">
-                        <li>Git & GitHub</li>
-                        <li>Docker</li>
-                        <li>AWS</li>
-                        <li>Vercel</li>
-                        <li>VS Code</li>
-                        <li>Postman</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Specialties</h4>
-                    <ul class="skill-list">
-                        <li>OSINT</li>
-                        <li>Development</li>
-                        <li>Cybersecurity</li>
-                        <li>Data Analysis</li>
-                        <li>UI/UX Design</li>
-                        <li>Performance Optimization</li>
-                    </ul>
+            </div>
+            
+            <div class="project-card">
+                <h3>More Coming Soon</h3>
+                <p>I'm constantly working on new projects. Check back soon for more code, experiments, and digital creations from the matrix.</p>
+                <div class="project-links">
+                    <a href="https://github.com/hellochelly" class="project-link" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
                 </div>
             </div>
         </div>
         
-        <div class="timeline">
-            <h3>Digital Evolution Timeline</h3>
-            <div class="timeline-item">
-                <div class="timeline-year">1993</div>
-                <div class="timeline-content">
-                    <h4>First Contact</h4>
-                    <p>First encounter with a computer, the beginning of a lifelong digital journey</p>
+        <div class="podcast-section">
+            <h3>Podcast Links</h3>
+            <div class="podcast-grid">
+                <div class="podcast-card">
+                    <h4>Podcast Coming Soon</h4>
+                    <p>I'm planning to start a podcast about technology, coding, and digital culture. Stay tuned for updates!</p>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">1995</div>
-                <div class="timeline-content">
-                    <h4>Code Awakening</h4>
-                    <p>Built first website, discovered the magic of programming with HTML and basic scripts</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2005</div>
-                <div class="timeline-content">
-                    <h4>Digital Native</h4>
-                    <p>Fully immersed in the digital realm, mastering multiple programming languages and web technologies</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2020</div>
-                <div class="timeline-content">
-                    <h4>OSINT Ghost</h4>
-                    <p>Developed interest in open-source intelligence and security, becoming a shadow in the digital realm</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-content">
-                    <h4>Digital Architect</h4>
-                    <p>Building the future, one line of code at a time. The matrix is my canvas, and every project is a step deeper into the digital frontier.</p>
+                
+                <div class="podcast-card">
+                    <h4>Future Episodes</h4>
+                    <p>Topics will include web development, cybersecurity, OSINT, and the intersection of technology and society.</p>
                 </div>
             </div>
         </div>
@@ -653,18 +586,6 @@
                     setTimeout(() => {
                         this.style.animation = '';
                     }, 300);
-                });
-            });
-            
-            // Add hover effects to skill items
-            const skillItems = document.querySelectorAll('.skill-list li');
-            skillItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.textShadow = '0 0 10px #00ff41';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.textShadow = '';
                 });
             });
         });

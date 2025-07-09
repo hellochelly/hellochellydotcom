@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelloChelly - About the Digital Architect</title>
+    <title>HelloChelly - Contact the Digital Architect</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
@@ -196,159 +196,232 @@
             color: #cccccc;
         }
         
-        /* About section */
-        .about-section {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #00ff41;
-            border-radius: 10px;
-            padding: 3rem;
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
             margin: 3rem 0;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
         
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff0080, #00ffff, #00ff41);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
+        /* Contact Form */
+        .contact-form {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
         }
         
-        .about-section:hover::before {
-            transform: translateX(0);
-        }
-        
-        .about-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
-        }
-        
-        .about-section h3 {
-            font-family: 'Orbitron', monospace;
+        .contact-form h3 {
             color: #00ffff;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', monospace;
+            text-align: center;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
         }
         
-        .about-section h3::before {
+        .contact-form h3::before {
             content: '>';
             color: #00ff41;
             font-weight: bold;
         }
         
-        .about-section p {
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
         
-        /* Skills section */
-        .skills-container {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 3rem 0;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .skill-category {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid #00ffff;
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-        
-        .skill-category h4 {
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
             color: #00ffff;
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', monospace;
-            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .skill-list {
-            list-style: none;
-        }
-        
-        .skill-list li {
-            color: #cccccc;
-            padding: 0.3rem 0;
-            border-left: 2px solid transparent;
-            padding-left: 1rem;
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            color: #ffffff;
+            font-family: 'Share Tech Mono', monospace;
             transition: all 0.3s ease;
         }
         
-        .skill-list li:hover {
-            border-left-color: #00ff41;
-            color: #00ff41;
-            transform: translateX(5px);
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
         
-        /* Timeline */
-        .timeline {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Contact Info */
+        .contact-info {
             background: rgba(0, 0, 0, 0.8);
             border: 2px solid #ff0080;
             border-radius: 10px;
             padding: 2rem;
-            margin: 3rem 0;
             box-shadow: 0 0 30px rgba(255, 0, 128, 0.2);
         }
         
-        .timeline h3 {
+        .contact-info h3 {
             color: #ff0080;
-            text-align: center;
             margin-bottom: 2rem;
             font-family: 'Orbitron', monospace;
-        }
-        
-        .timeline-item {
+            text-align: center;
             display: flex;
             align-items: center;
-            margin-bottom: 2rem;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info h3::before {
+            content: '>';
+            color: #ff0080;
+            font-weight: bold;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
             padding: 1rem;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 8px;
             border-left: 4px solid #ff0080;
+            transition: all 0.3s ease;
         }
         
-        .timeline-year {
+        .contact-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.3);
+        }
+        
+        .contact-icon {
             background: #ff0080;
             color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
             margin-right: 1rem;
-            min-width: 80px;
-            text-align: center;
+            font-family: 'Orbitron', monospace;
         }
         
-        .timeline-content {
+        .contact-details {
             flex: 1;
         }
         
-        .timeline-content h4 {
+        .contact-details h4 {
             color: #ff0080;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
         
-        .timeline-content p {
+        .contact-details p {
             color: #cccccc;
+        }
+        
+        /* Social Links */
+        .social-links {
+            margin: 4rem 0;
+        }
+        
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #00ff41;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 120px;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+        
+        .social-icon {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .social-link span {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .social-link.facebook:hover {
+            border-color: #1877f2;
+            color: #1877f2;
+            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+        }
+        
+        .social-link.twitter:hover {
+            border-color: #1da1f2;
+            color: #1da1f2;
+            box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
+        }
+        
+        .social-link.linkedin:hover {
+            border-color: #0077b5;
+            color: #0077b5;
+            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4);
+        }
+        
+        .social-link.github:hover {
+            border-color: #333;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(51, 51, 51, 0.4);
         }
         
         /* Terminal window */
@@ -401,6 +474,44 @@
             color: #ff0080;
         }
         
+        /* Buttons */
+        .cyber-button {
+            background: transparent;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 1rem 2rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-button:hover {
+            color: #000;
+            background: #00ff41;
+            box-shadow: 0 0 20px #00ff41;
+        }
+        
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+        
         /* Footer */
         footer {
             text-align: center;
@@ -430,23 +541,18 @@
                 font-size: 2rem;
             }
             
-            .about-section {
-                padding: 2rem;
-                margin: 2rem 1rem;
-            }
-            
-            .skills-grid {
+            .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
-            .timeline-item {
-                flex-direction: column;
-                text-align: center;
+            .social-grid {
+                gap: 1rem;
             }
             
-            .timeline-year {
-                margin-right: 0;
-                margin-bottom: 1rem;
+            .social-link {
+                min-width: 100px;
+                padding: 1rem;
             }
         }
         
@@ -475,7 +581,7 @@
     
     <header>
         <div class="logo glitch" data-text="HelloChelly">HelloChelly</div>
-        <div class="tagline">// Digital Architect Profile //</div>
+        <div class="tagline">// Contact the Digital Architect //</div>
     </header>
     
     <nav>
@@ -490,8 +596,8 @@
     
     <main>
         <section class="hero">
-            <h1 class="glitch" data-text="Digital Architect">Digital Architect</h1>
-            <p>From the depths of cyberspace to the neon-lit streets of the digital underground, I am a code architect who bridges the gap between human dreams and machine logic.</p>
+            <h1 class="glitch" data-text="Establish Connection">Establish Connection</h1>
+            <p>Need help with something? Want to chat? Send a transmission through the matrix and I'll get back to you.</p>
         </section>
         
         <div class="terminal">
@@ -499,130 +605,110 @@
                 <div class="terminal-button red"></div>
                 <div class="terminal-button yellow"></div>
                 <div class="terminal-button green"></div>
-                <span style="color: #ccc; margin-left: 1rem;">profile_scan.exe</span>
+                <span style="color: #ccc; margin-left: 1rem;">contact_system.exe</span>
             </div>
             <div class="terminal-body">
                 <div class="terminal-line">
-                    <span class="prompt">system@matrix:~$</span>
-                    <span class="command">scan_profile --user=chelly</span>
+                    <span class="prompt">system@contact:~$</span>
+                    <span class="command">init_communication</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">Profile found. Accessing neural pathways...</span>
+                    <span class="output">Communication channels open.</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">Digital native since age 6</span>
+                    <span class="output">Ready to receive transmissions...</span>
                 </div>
                 <div class="terminal-line">
-                    <span class="output">Frontend developer with React/Node.js expertise</span>
-                </div>
-                <div class="terminal-line">
-                    <span class="output">OSINT ghost by night</span>
-                </div>
-                <div class="terminal-line">
-                    <span class="prompt">system@matrix:~$</span>
+                    <span class="prompt">system@contact:~$</span>
                     <span style="animation: blink 1s infinite;">_</span>
                 </div>
             </div>
         </div>
         
-        <div class="about-section">
-            <h3>Digital Architect</h3>
-            <p>Digital native since age 6, when I first touched a keyboard and fell into the rabbit hole of code. I am a frontend developer, with expertise in React, Node.js, and Go. Building interfaces that bridge the gap between human dreams and machine logic.</p>
-            <p>When the sun sets, I transform into an OSINT ghost, hunting digital footprints in the shadows of the web. The matrix is my playground, and every line of code is a step deeper into the digital frontier.</p>
-            <p>Constantly downloading new knowledge through documentaries and e-books on my Kindle. When I'm not debugging code, you'll find me exploring new horizons and seeking the next adventure. Whether it's a new framework or discovering new places across the globe, I'm always chasing the next digital high. The world is my database, and I'm constantly querying for new experiences.</p>
-            <p>In a world of dark terminals and glowing screens, I find beauty in the small things - kawaii culture brings color to my monochrome code life. Balancing the harsh edges of cyberpunk with soft pixels and cute aesthetics. Because even in the matrix, we need a little sweetness to keep the soul intact. My code may be cold and logical, but my heart beats with the rhythm of neon dreams.</p>
-            <p>I believe in the power of code to change the world, one function at a time. Every bug is a lesson, every crash is a story, and every successful deployment is a victory against the chaos of the digital realm. In the grand scheme of the internet, we're all just data points, but I choose to be a data point that creates, innovates, and leaves a positive digital footprint.</p>
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h3>Send Transmission</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your handle...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@matrix.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="Share your thoughts, project ideas, or just say hello..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cyber-button">Transmit Message</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Direct Channels</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">E</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>chelly@hellochelly.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">L</div>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>Digital Realm, Matrix</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">T</div>
+                    <div class="contact-details">
+                        <h4>Response Time</h4>
+                        <p>Usually within 24 hours</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">A</div>
+                    <div class="contact-details">
+                        <h4>Availability</h4>
+                        <p>Available for questions & help</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <div class="skills-container">
-            <h3 style="color: #00ffff; text-align: center; margin-bottom: 2rem; font-family: 'Orbitron', monospace;">Skill Matrix</h3>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Frontend</h4>
-                    <ul class="skill-list">
-                        <li>React.js</li>
-                        <li>JavaScript (ES6+)</li>
-                        <li>HTML5 & CSS3</li>
-                        <li>TypeScript</li>
-                        <li>Next.js</li>
-                        <li>Tailwind CSS</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Backend</h4>
-                    <ul class="skill-list">
-                        <li>Node.js</li>
-                        <li>Express.js</li>
-                        <li>Go</li>
-                        <li>Python</li>
-                        <li>REST APIs</li>
-                        <li>GraphQL</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Tools & Tech</h4>
-                    <ul class="skill-list">
-                        <li>Git & GitHub</li>
-                        <li>Docker</li>
-                        <li>AWS</li>
-                        <li>Vercel</li>
-                        <li>VS Code</li>
-                        <li>Postman</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Specialties</h4>
-                    <ul class="skill-list">
-                        <li>OSINT</li>
-                        <li>Development</li>
-                        <li>Cybersecurity</li>
-                        <li>Data Analysis</li>
-                        <li>UI/UX Design</li>
-                        <li>Performance Optimization</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline">
-            <h3>Digital Evolution Timeline</h3>
-            <div class="timeline-item">
-                <div class="timeline-year">1993</div>
-                <div class="timeline-content">
-                    <h4>First Contact</h4>
-                    <p>First encounter with a computer, the beginning of a lifelong digital journey</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">1995</div>
-                <div class="timeline-content">
-                    <h4>Code Awakening</h4>
-                    <p>Built first website, discovered the magic of programming with HTML and basic scripts</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2005</div>
-                <div class="timeline-content">
-                    <h4>Digital Native</h4>
-                    <p>Fully immersed in the digital realm, mastering multiple programming languages and web technologies</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2020</div>
-                <div class="timeline-content">
-                    <h4>OSINT Ghost</h4>
-                    <p>Developed interest in open-source intelligence and security, becoming a shadow in the digital realm</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-content">
-                    <h4>Digital Architect</h4>
-                    <p>Building the future, one line of code at a time. The matrix is my canvas, and every project is a step deeper into the digital frontier.</p>
-                </div>
+        <!-- Social Links -->
+        <div class="social-links">
+            <h3 style="color: #00ffff; text-align: center; margin-bottom: 2rem; font-family: 'Orbitron', monospace;">Connect in the Digital Realm</h3>
+            <div class="social-grid">
+                <a href="https://facebook.com/hellochelly" class="social-link facebook" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">FB</div>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://twitter.com/helloladychelly" class="social-link twitter" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">TW</div>
+                    <span>Twitter</span>
+                </a>
+                <a href="https://linkedin.com/in/hellochelly" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">IN</div>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/hellochelly" class="social-link github" target="_blank" rel="noopener noreferrer">
+                    <div class="social-icon">GH</div>
+                    <span>GitHub</span>
+                </a>
             </div>
         </div>
     </main>
@@ -643,6 +729,38 @@
         `;
         document.head.appendChild(style);
         
+        // Contact form handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                if (!name || !email || !subject || !message) {
+                    alert('Please fill in all fields before transmitting.');
+                    return;
+                }
+                
+                // Show success message
+                alert('Transmission sent successfully! I\'ll get back to you soon.');
+                
+                // Reset form
+                form.reset();
+                
+                // Add glitch effect
+                const hero = document.querySelector('.hero h1');
+                hero.style.animation = 'glitch-1 0.3s infinite';
+                setTimeout(() => {
+                    hero.style.animation = '';
+                }, 300);
+            });
+        });
+        
         // Add some interactive glitch effects
         document.addEventListener('DOMContentLoaded', function() {
             const glitchElements = document.querySelectorAll('.glitch');
@@ -653,18 +771,6 @@
                     setTimeout(() => {
                         this.style.animation = '';
                     }, 300);
-                });
-            });
-            
-            // Add hover effects to skill items
-            const skillItems = document.querySelectorAll('.skill-list li');
-            skillItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.textShadow = '0 0 10px #00ff41';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.textShadow = '';
                 });
             });
         });
