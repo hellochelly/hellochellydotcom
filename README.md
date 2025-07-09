@@ -34,7 +34,8 @@ This repository contains the source code for my personal website - a digital spa
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 </div>
 
@@ -110,7 +111,8 @@ This project is licensed under the MIT License - see the <LICENSE> file for deta
 - **Design Inspiration**: Various design communities and portfolios
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
 - **Fonts**: [Google Fonts](https://fonts.google.com/)
-- **Hosting**: [Netlify](https://netlify.com/)
+- **Hosting**: [Vercel](https://vercel.com/)
+- **Database**: [MongoDB](https://mongodb.com/)
 
 -----
 
