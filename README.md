@@ -14,7 +14,7 @@
 
 -----
 
-## 🚀 HelloChellydotCom
+## 🚀 HelloChellydotCom Site
 
 This repository contains the source code for my personal website - a digital space where I share my thoughts, projects, and journey in tech. It’s built with modern web technologies and designed to be fast, accessible, and engaging.
 
