@@ -628,7 +628,7 @@
         <div class="contact-grid">
             <div class="contact-form">
                 <h3>Send Transmission</h3>
-                <form id="contactForm">
+                <form id="contactForm" name="contact" method="POST" data-netlify="true">
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your handle...">
@@ -719,6 +719,7 @@
     </footer>
     
     <script>
+        
         // Blinking cursor animation
         const style = document.createElement('style');
         style.textContent = `
@@ -746,18 +747,53 @@
                     return;
                 }
                 
-                // Show success message
-                alert('Transmission sent successfully! I\'ll get back to you soon.');
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Transmitting...';
+                submitBtn.disabled = true;
                 
-                // Reset form
-                form.reset();
-                
-                // Add glitch effect
-                const hero = document.querySelector('.hero h1');
-                hero.style.animation = 'glitch-1 0.3s infinite';
-                setTimeout(() => {
-                    hero.style.animation = '';
-                }, 300);
+                // Send email using our API
+                fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        subject: subject,
+                        message: message
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('SUCCESS!', data.message);
+                        alert('Transmission sent successfully! I\'ll get back to you soon.');
+                        
+                        // Reset form
+                        form.reset();
+                        
+                        // Add glitch effect
+                        const hero = document.querySelector('.hero h1');
+                        hero.style.animation = 'glitch-1 0.3s infinite';
+                        setTimeout(() => {
+                            hero.style.animation = '';
+                        }, 300);
+                    } else {
+                        throw new Error(data.error || 'Failed to send message');
+                    }
+                })
+                .catch(error => {
+                    console.log('FAILED...', error);
+                    alert('Transmission failed. Please try again or contact me directly at chelly@hellochelly.com');
+                })
+                .finally(function() {
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
             });
         });
         
